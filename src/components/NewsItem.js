@@ -1,5 +1,5 @@
 import React from "react";
-import preview from './preview-not-available.png'
+import preview from './preview-not-available.png';
 
 
 const NewsItem =(props)=> {
