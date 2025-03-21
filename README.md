@@ -9,7 +9,7 @@ NewsFox is a modern news website that provides the latest updates from various c
 - Fast and lightweight performance using React.js.
 
 ## Tech Stack
-- **Frontend:** React.js, Bootstrap, CSS
+- **Frontend:** React.js, Bootstrap, CSS 
 - **API Integration:** News API
 - **Deployment:** Render / Vercel (optional)
 
