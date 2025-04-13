@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+input::placeholder {
+  color: #aaa !important;
+}
+
+.input-group:focus-within {
+  box-shadow: 0 0 0 3px rgba(13, 202, 240, 0.25);
+}
+.search-expand {
+  animation: expandSearch 0.3s ease-out;
+}
+
+@keyframes expandSearch {
+  from {
+    transform: scaleX(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
