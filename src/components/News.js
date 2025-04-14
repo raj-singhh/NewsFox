@@ -3,6 +3,8 @@ import NewsItem from './NewsItem';
 import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
+// import IntroSection from './IntroSection';
+
 
 const News = (props) => {
   const [articles, setArticles] = useState([]);
@@ -75,7 +77,7 @@ const News = (props) => {
     <>
       {/* Search Bar */}
       {/* Top Row with Headline + Expandable Search */}
-      <div className="container sticky-top bg-white" style={{ top: '56px', zIndex: 1020 }}>
+      <div className="container sticky-top top-heading-blur" style={{ top: '56px', zIndex: 1020 }}>
       <div className="d-flex flex-wrap flex-md-nowrap justify-content-between align-items-center py-3 gap-2 gap-md-0">
 
           {/* Headline */}
@@ -129,6 +131,8 @@ const News = (props) => {
           </div>
         </div>
       </div>
+      {/* Introsection */}
+      {/* <IntroSection/> */}
 
       <InfiniteScroll
         dataLength={articles.length}

@@ -57,4 +57,189 @@ input::placeholder {
     opacity: 1;
   }
 }
+/* Fixed Background */
+.web-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  background-image: 
+    linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 6rem 4rem;
+}
 
+.radial-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle 800px at 100% 200px, #d5c5ff, transparent);
+}
+
+/* Main Layout */
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.content {
+  flex: 1; /* Takes all available space, pushing footer down */
+  padding-bottom: 2rem; /* Optional spacing above footer */
+}
+
+/* Top headline blur  */
+
+.top-heading-blur {
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.8); /* Soft translucent white */
+  border-radius: 10px;
+  padding: 5px 20px;
+ 
+}
+
+
+
+/* Introsection */
+
+/* Base Styles */
+.intro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* background-color: #ffffff; */
+  padding: 2rem;
+}
+
+.intro-content {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* Header Styles */
+.intro-header {
+  margin-bottom: 2rem;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f0f5ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  fill: #3b82f6;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fox-emoji {
+  font-size: 1.8rem;
+  animation: gentleBounce 2s ease-in-out infinite;
+}
+
+/* Typewriter Styles */
+.typewriter-container {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #3b82f6;
+  min-height: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.react-simple-typewriter__cursor {
+  color: #3b82f6 !important;
+  font-weight: bold !important;
+}
+
+/* Description Styles */
+.intro-description {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* Decorative Elements */
+.visual-elements {
+  position: relative;
+  height: 100px;
+}
+
+.circle-element {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle-element.blue {
+  width: 150px;
+  height: 150px;
+  background-color: #3b82f6;
+  top: -50px;
+  left: 20%;
+}
+
+.circle-element.purple {
+  width: 100px;
+  height: 100px;
+  background-color: #8b5cf6;
+  bottom: 0;
+  right: 15%;
+}
+
+.line-element {
+  position: absolute;
+  height: 2px;
+  width: 100px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Animations */
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .typewriter-container {
+    font-size: 1.2rem;
+  }
+  
+  .intro-description {
+    font-size: 1rem;
+  }
+}
+
+
+/* news ---> */
