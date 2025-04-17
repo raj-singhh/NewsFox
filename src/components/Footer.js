@@ -51,13 +51,13 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="footer-bottom">
-          <div className="social-links">
-            <a target='_blank' href="https://x.com/singhhraj_" aria-label="X"><FaXTwitter /></a>
-            <a target='_blank' href="https://www.facebook.com/anjay.rajpaliwal/" aria-label="Facebook"><FaFacebook /></a>
-            <a target='_blank' href="https://instagram.com" aria-label="Instagram"><FaInstagram /></a>
-            <a target='_blank' href="https://www.linkedin.com/in/rajsingh-/" aria-label="LinkedIn"><FaLinkedin /></a>
-            <a target='_blank' href="https://github.com/raj-singhh" aria-label="GitHub"><FaGithub /></a>
+        <div className="footer-bottom" >
+          <div className="social-links " >
+            <a target='_blank' href="https://x.com/singhhraj_" aria-label="X" rel="noopener noreferrer"><FaXTwitter /></a>
+            <a target='_blank' href="https://www.facebook.com/anjay.rajpaliwal/" aria-label="Facebook" rel="noopener noreferrer"><FaFacebook /></a>
+            <a target='_blank' href="https://instagram.com" aria-label="Instagram" rel="noopener noreferrer"><FaInstagram /></a>
+            <a target='_blank' href="https://www.linkedin.com/in/rajsingh-/" aria-label="LinkedIn" rel="noopener noreferrer"><FaLinkedin /></a>
+            <a target='_blank' href="https://github.com/raj-singhh" aria-label="GitHub" rel="noopener noreferrer"><FaGithub /></a>
           </div>
 
           <div className="copyright">

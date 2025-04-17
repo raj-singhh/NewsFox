@@ -1,0 +1,156 @@
+/* Base Styles */
+.report-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    /* background: white; */
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Header Styles */
+  .report-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .report-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .report-header p {
+    color: #7f8c8d;
+    font-size: 1rem;
+  }
+  
+  /* Form Styles */
+  .report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    color: #34495e;
+    font-size: 0.95rem;
+  }
+  
+  /* Input Fields */
+  select,
+  textarea,
+  input[type="url"],
+  input[type="email"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+  }
+  
+  select:focus,
+  textarea:focus,
+  input[type="url"]:focus,
+  input[type="email"]:focus {
+    outline: none;
+    border-color: #4682b4;
+    background-color: white;
+  }
+  
+  textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* Button Styles */
+  .submit-button {
+    padding: 1rem;
+    background-color: #4682b4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .submit-button:hover {
+    background-color: #3a6d99;
+  }
+  
+  .submit-button:disabled {
+    background-color: #a0b8cc;
+    cursor: not-allowed;
+  }
+  
+  /* Success Message */
+  .report-success {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .report-success h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .report-success p {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+  }
+  
+  .reference-id {
+    font-weight: 600;
+    color: #4682b4;
+    margin-bottom: 2rem;
+  }
+  
+  /* Error Message */
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Spinner Animation */
+  .spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .report-container {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+    
+    .report-header h1 {
+      font-size: 1.5rem;
+    }
+  }

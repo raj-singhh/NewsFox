@@ -9,11 +9,12 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Feedback from "./components/Feedback";
 import ReportIssue from "./components/ReportIssue";
+import IntroSection from "./components/IntroSection";
 
 function App() {
   const pageSize = 5;
   const apiKey = process.env.REACT_APP_NEWS_API;
-  const web3formKey = process.env.WEB3FORM_ACCESS_KEY;
+  const web3formKey = process.env.REACT_APP_WEB3FORM;
 
   const [progress, setProgress] = useState(0);
   const [language, setLanguage] = useState("en");
@@ -33,7 +34,8 @@ function App() {
           <LoadingBar color="#f11946" progress={progress} />
           <main className="content">
             <Routes>
-              <Route exact path="/" element={<News setProgress={setProgress} apiKey={apiKey} key="top" pageSize={pageSize} country={country} category="top" language={language} />} />
+              <Route exact path="/" element={<IntroSection setProgress={setProgress} apiKey={apiKey} key="top" pageSize={pageSize} country={country} category="top" language={language} />} />
+              <Route exact path="/news" element={<News setProgress={setProgress} apiKey={apiKey} key="top" pageSize={pageSize} country={country} category="top" language={language} />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/top" element={<News setProgress={setProgress} apiKey={apiKey} key="top" pageSize={pageSize} country={country} category="top" language={language} />} />
               <Route exact path="/business" element={<News setProgress={setProgress} apiKey={apiKey} key="business" pageSize={pageSize} country={country} category="business" language={language} />} />
@@ -43,8 +45,8 @@ function App() {
               <Route exact path="/sports" element={<News setProgress={setProgress} apiKey={apiKey} key="sports" pageSize={pageSize} country={country} category="sports" language={language} />} />
               <Route exact path="/technology" element={<News setProgress={setProgress} apiKey={apiKey} key="technology" pageSize={pageSize} country={country} category="technology" language={language} />} />
               <Route exact path="/contact" element={<Contact web3formKey={web3formKey}/>} />
-              <Route exact path="/feedback" element={<Feedback/>} />
-              <Route exact path="/report-issue" element={<ReportIssue/>} />
+              <Route exact path="/feedback" element={<Feedback web3formKey={web3formKey}/>} />
+              <Route exact path="/report-issue" element={<ReportIssue web3formKey={web3formKey}/>} />
             </Routes>
           </main>
           <Footer />

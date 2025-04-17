@@ -1,123 +1,210 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './ContactFeedback.css'; // Assuming you have a CSS file for styling
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import './ContactForm.css';
+import contactImage from './contact-pic.jpeg';
 
-const Contact = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+export default function Contact(props) {
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [formValues, setFormValues] = useState({
     name: '',
     email: '',
+    phone: '',
+    subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    // Check if all required fields are filled
+    const isValid = formValues.name.trim() && 
+                    formValues.email.trim() && 
+                    formValues.subject.trim() && 
+                    formValues.message.trim();
+    setFormValid(isValid);
+  }, [formValues]);
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormValues(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setIsSubmitting(true);
+    setResult("Sending...");
+    const formData = new FormData();
     
-    // Simulate API call
+    Object.entries(formValues).forEach(([key, value]) => {
+      if (value) formData.append(key, value);
+    });
+    formData.append("access_key", props.web3formKey);
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Form Submitted Successfully!");
+        setFormValues({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setResult(data.message || "Submission failed. Please try again.");
+      }
     } catch (error) {
-      setSubmitStatus('error');
+      setResult("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
+      setTimeout(() => setResult(""), 5000);
     }
   };
 
   return (
-    <div className="contact-container mt-5">
-      <div className="contact-header">
-        <h1>Contact Us</h1>
-        <p>Have questions? We're here to help!</p>
-      </div>
-
-      <div className="contact-content">
-        <div className="contact-form-container">
-          <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+    <div className="contact-container mt-5 pt-5">
+      <div className="contact-layout">
+        {/* Left side with image and text */}
+        <motion.div 
+          className="contact-left"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="contact-content">
+            <h1>Contact Us</h1>
+            <p>We are available for questions, feedback, or collaboration opportunities. Let us know how we can help!</p>
+            <p>We are committed to providing you with the best support and answering all your queries promptly.</p>
+            <div className="contact-details">
+              <p><strong>Email:</strong> rajsinghh314@gmail.com</p>
             </div>
+          </div>
+          <div className="contact-image-container">
+            <img 
+              src={contactImage} 
+              alt="Contact us" 
+              className="contact-image"
+            />
+          </div>
+        </motion.div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+        {/* Right side with form */}
+        <motion.form
+          onSubmit={onSubmit}
+          className="contact-form"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="form-group">
+            <label>Your Name</label>
+            <motion.input
+              type="text"
+              name="name"
+              required
+              value={formValues.name}
+              onChange={handleInputChange}
+              placeholder="Enter your name"
+              className="form-input"
+              whileFocus={{ boxShadow: "0 0 0 2px rgba(70, 130, 180, 0.5)" }}
+            />
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
+          <div className="form-group">
+            <label>Email Address</label>
+            <motion.input
+              type="email"
+              name="email"
+              required
+              value={formValues.email}
+              onChange={handleInputChange}
+              placeholder="Enter your email"
+              className="form-input"
+              whileFocus={{ boxShadow: "0 0 0 2px rgba(70, 130, 180, 0.5)" }}
+            />
+          </div>
 
-            <button 
-              type="submit" 
-              className="submit-btn"
-              disabled={isSubmitting}
+          <div className="form-group">
+            <label>Phone Number</label>
+            <motion.input
+              type="tel"
+              name="phone"
+              value={formValues.phone}
+              onChange={handleInputChange}
+              placeholder="Your 10-digit number"
+              className="form-input"
+              pattern="[0-9]{10}"
+              whileFocus={{ boxShadow: "0 0 0 2px rgba(70, 130, 180, 0.5)" }}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Subject</label>
+            <motion.input
+              type="text"
+              name="subject"
+              required
+              value={formValues.subject}
+              onChange={handleInputChange}
+              placeholder="What's this about?"
+              className="form-input"
+              whileFocus={{ boxShadow: "0 0 0 2px rgba(70, 130, 180, 0.5)" }}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Your Message</label>
+            <motion.textarea
+              name="message"
+              required
+              value={formValues.message}
+              onChange={handleInputChange}
+              rows="4"
+              placeholder="Type your message here..."
+              className="form-textarea"
+              whileFocus={{ boxShadow: "0 0 0 2px rgba(70, 130, 180, 0.5)" }}
+            />
+          </div>
+
+          <motion.button
+            type="submit"
+            className={`submit-button ${!formValid ? 'disabled' : ''} `} 
+            whileHover={formValid ? { scale: 1.02 } : {}}
+            whileTap={formValid ? { scale: 0.98 } : {}}
+            disabled={!formValid || isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <span className="spinner"></span>
+                Sending...
+              </>
+            ) : (
+              "Send Message"
+            )}
+          </motion.button>
+
+          {result && (
+            <motion.div
+              className={`result-message ${result.includes("Success") ? "success" : "error"}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-
-            {submitStatus === 'success' && (
-              <div className="alert success">
-                Thank you! Your message has been sent successfully.
-              </div>
-            )}
-            {submitStatus === 'error' && (
-              <div className="alert error">
-                Something went wrong. Please try again.
-              </div>
-            )}
-          </form>
-        </div>
-
-        <div className="contact-info">
-          <h3>Other Ways to Reach Us</h3>
-          <div className="info-item">
-            <i className="icon">✉️</i>
-            <span>support@newsfox.com</span>
-          </div>
-          <div className="info-item">
-            <i className="icon">📞</i>
-            <span>+1 (555) 123-4567</span>
-          </div>
-          <div className="info-item">
-            <i className="icon">🏢</i>
-            <span>123 News Street, Media City, MC 12345</span>
-          </div>
-        </div>
+              {result.startsWith("Form Submitted") ? "✓ " + result : "✗ " + result}
+            </motion.div>
+          )}
+        </motion.form>
       </div>
     </div>
   );
-};
-
-export default Contact;
+}
